@@ -3,11 +3,20 @@ from openai import OpenAI
 import os
 import base64
 
+# Configurar API
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-tu_api_key_local"))
 
 st.set_page_config(page_title="Coach X3 | Ex3 Basket", layout="centered")
 
-# Estilo definitivo que funciona en iOS, Android y PC
+# 🔒 Forzar tema claro incluso si el navegador está en modo oscuro
+st.markdown("""
+    <script>
+        const body = window.parent.document.querySelector('body');
+        body.setAttribute('data-theme', 'light');
+    </script>
+""", unsafe_allow_html=True)
+
+# Estilo visual adaptado
 st.markdown("""
     <style>
         body, .main {
@@ -54,7 +63,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Logo base64 centrado
+# Logo centrado
 file_ = open("logo_ex3basket.png", "rb")
 contents = file_.read()
 data_url = base64.b64encode(contents).decode("utf-8")
@@ -66,11 +75,11 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# Título y subtítulo centrados
+# Título y subtítulo
 st.markdown("<h1 style='text-align: center;'>Coach X3 - Ex3 Basket</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; font-weight: normal;'>Tu entrenador virtual de básquetbol 3x3</h3>", unsafe_allow_html=True)
 
-# Instrucciones
+# Bienvenida
 st.write("""
 **¡Bienvenido!** Este tótem fue creado para ayudarte a aprender básquetbol 3x3.
 Hazle una pregunta a Coach X3 o selecciona una de las siguientes opciones:
