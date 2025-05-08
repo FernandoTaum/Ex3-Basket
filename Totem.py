@@ -16,10 +16,6 @@ st.markdown("""
         .stApp {
             font-family: 'Segoe UI', sans-serif;
         }
-        .title-container {
-            text-align: center;
-            margin-top: 20px;
-        }
         .response-box {
             background-color: white;
             padding: 20px;
@@ -46,12 +42,14 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Logo y título
+# Logo centrado con HTML puro
 st.markdown("""
-<div style='text-align: center;'>
-    <img src='logo_ex3basket.png' width='140'/>
+<div style='text-align: center; margin-bottom: 0.5em;'>
+    <img src='https://raw.githubusercontent.com/FernandoTaum/Ex3-Basket/main/logo_ex3basket.png' width='140'/>
 </div>
 """, unsafe_allow_html=True)
+
+# Título
 st.title("Coach X3 - Ex3 Basket")
 st.subheader("Tu entrenador virtual de básquetbol 3x3")
 
@@ -77,7 +75,6 @@ with col3:
 # Entrada personalizada
 user_input = st.text_input("...o escribe tu propia pregunta:")
 
-# Usar input si hay
 if user_input:
     pregunta = user_input
 
@@ -109,7 +106,7 @@ if pregunta:
         st.write(respuesta)
         st.markdown('</div>', unsafe_allow_html=True)
 
-# Pie de autoría sutil
+# Pie de autoría
 st.markdown("""
 <hr style="margin-top: 30px;">
 <p style='text-align: center; color: gray; font-size: 0.8em;'>
