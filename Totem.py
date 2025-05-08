@@ -8,7 +8,7 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-tu_api_key_local"))
 
 st.set_page_config(page_title="Coach X3 | Ex3 Basket", layout="centered")
 
-# Estilos visuales
+# Estilo visual general
 st.markdown("""
     <style>
         body, .main {
@@ -31,22 +31,20 @@ st.markdown("""
             background-color: white;
         }
         .stButton button {
-    background-color: #111111;
-    color: white;
-    border-radius: 8px;
-    padding: 0.5em 1.5em;
-    font-weight: bold;
-    border: none;
-}
-
+            background-color: #111111;
+            color: white;
+            border-radius: 8px;
+            padding: 0.5em 1.5em;
+            font-weight: bold;
+            border: none;
         }
-        h1, h2 {
+        h1, h2, h3 {
             color: #333333;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# Logo centrado desde archivo local
+# Logo centrado (local)
 file_ = open("logo_ex3basket.png", "rb")
 contents = file_.read()
 data_url = base64.b64encode(contents).decode("utf-8")
@@ -58,9 +56,9 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# Título
-st.title("Coach X3 - Ex3 Basket")
-st.subheader("Tu entrenador virtual de básquetbol 3x3")
+# Título y subtítulo centrados
+st.markdown("<h1 style='text-align: center;'>Coach X3 - Ex3 Basket</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; font-weight: normal;'>Tu entrenador virtual de básquetbol 3x3</h3>", unsafe_allow_html=True)
 
 # Instrucciones
 st.write("""
@@ -68,7 +66,7 @@ st.write("""
 Hazle una pregunta a Coach X3 o selecciona una de las siguientes opciones:
 """)
 
-# Preguntas rápidas
+# Preguntas sugeridas
 col1, col2, col3 = st.columns(3)
 pregunta = ""
 with col1:
@@ -119,6 +117,6 @@ if pregunta:
 st.markdown("""
 <hr style="margin-top: 30px;">
 <p style='text-align: center; color: gray; font-size: 0.8em;'>
-Desarrollado por Fernando Taum Aros para el proyecto Ex3 Basket · 2025
+Desarrollado por Fernando Aros Vera para el proyecto Ex3 Basket · 2025
 </p>
 """, unsafe_allow_html=True)
