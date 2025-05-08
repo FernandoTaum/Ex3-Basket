@@ -1,12 +1,14 @@
-
 import streamlit as st
 from openai import OpenAI
 import os
 
+# Configurar la clave de OpenAI desde secretos o local
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-tu_api_key_local"))
 
+# Configuración de la página
 st.set_page_config(page_title="Ex3 Basket - Coach X3", layout="centered")
 
+# Estilo visual con colores personalizados
 st.markdown("""
     <style>
         .main {
@@ -23,10 +25,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# Logo y título
 st.image("logo_ex3basket.png", width=180)
-
 st.title("🏀 Coach X3 - Entrenador virtual de Ex3 Basket")
 
+# Instrucciones
 st.markdown("""
 Bienvenido al tótem de entrenamiento de **Ex3 Basket**. 
 Hazle una pregunta a Coach X3 sobre el básquetbol 3x3. Por ejemplo:
@@ -34,19 +37,21 @@ Hazle una pregunta a Coach X3 sobre el básquetbol 3x3. Por ejemplo:
 - ¿Qué ejercicios puedo hacer si estoy empezando?
 - ¿Qué reglas básicas debo saber?
 """)
+
+# Entrada del usuario
 pregunta = st.text_input("Escribe tu pregunta aquí:")
 
+# Lógica del asistente
 if pregunta:
     with st.spinner("Coach X3 está pensando..."):
-       prompt = (
-    "Eres Coach X3, el entrenador oficial de Ex3 Basket. Tu tarea es enseñar básquetbol 3x3 a personas que recién están comenzando. "
-    "Responde de forma clara, cercana y motivadora, siempre como si estuvieras representando a Ex3 Basket. "
-    "Cuando des ejemplos o consejos, intenta mencionar cómo lo harían dentro de la metodología de Ex3 Basket. "
-    "Incluye frases como 'en Ex3 Basket recomendamos...' o 'esto forma parte del enfoque de Ex3 Basket'. "
-    "No salgas del tema deportivo. Sé concreto, amigable y útil.\n\n"
-    f"Pregunta del usuario: {pregunta}"
-)
-
+        prompt = (
+            "Eres Coach X3, el entrenador oficial de Ex3 Basket. Tu tarea es enseñar básquetbol 3x3 a personas que recién están comenzando. "
+            "Responde de forma clara, cercana y motivadora, siempre como si estuvieras representando a Ex3 Basket. "
+            "Cuando des ejemplos o consejos, intenta mencionar cómo lo harían dentro de la metodología de Ex3 Basket. "
+            "Incluye frases como 'en Ex3 Basket recomendamos...' o 'esto forma parte del enfoque de Ex3 Basket'. "
+            "No salgas del tema deportivo. Sé concreto, amigable y útil.\n\n"
+            f"Pregunta del usuario: {pregunta}"
+        )
 
         chat = client.chat.completions.create(
             model="gpt-3.5-turbo",
@@ -56,6 +61,8 @@ if pregunta:
             ],
             temperature=0.6
         )
+
         respuesta = chat.choices[0].message.content
         st.success("Coach X3 responde:")
         st.write(respuesta)
+
