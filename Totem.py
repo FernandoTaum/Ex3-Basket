@@ -2,46 +2,75 @@ import streamlit as st
 from openai import OpenAI
 import os
 
-# Configurar la clave de OpenAI desde secretos o local
+# Configuración de la API
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-tu_api_key_local"))
 
-# Configuración de la página
-st.set_page_config(page_title="Ex3 Basket - Coach X3", layout="centered")
+# Configuración general de la página
+st.set_page_config(page_title="Coach X3 | Ex3 Basket", layout="centered")
 
-# Estilo visual con colores personalizados
+# Estilos personalizados con colores y formato
 st.markdown("""
     <style>
-        .main {
-            background-color: #ff6f3c;
-            color: white;
+        body {
+            background-color: #fff8f2;
         }
-        h1, h2, h3 {
-            color: white !important;
+        .main {
+            background-color: #fff8f2;
+        }
+        .stApp {
+            font-family: 'Arial', sans-serif;
         }
         .stTextInput > div > div > input {
-            background-color: white !important;
-            color: black !important;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: white;
+        }
+        .stButton button {
+            background-color: #ff6f3c;
+            color: white;
+            border-radius: 10px;
+            padding: 0.5em 1.5em;
+            font-weight: bold;
+        }
+        h1, h2 {
+            color: #333333;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# Logo y título
-st.image("logo_ex3basket.png", width=180)
-st.title("🏀 Coach X3 - Entrenador virtual de Ex3 Basket")
+# Logo y bienvenida
+st.image("logo_ex3basket.png", width=160)
+st.title("🏀 Coach X3")
+st.subheader("Entrenador virtual de Ex3 Basket")
 
 # Instrucciones
-st.markdown("""
-Bienvenido al tótem de entrenamiento de **Ex3 Basket**. 
-Hazle una pregunta a Coach X3 sobre el básquetbol 3x3. Por ejemplo:
-- ¿Cómo se juega el 3x3?
-- ¿Qué ejercicios puedo hacer si estoy empezando?
-- ¿Qué reglas básicas debo saber?
+st.write("""
+**¡Bienvenido!** Este tótem fue creado para ayudarte a aprender básquetbol 3x3.
+Hazle una pregunta a Coach X3 o selecciona una de las siguientes opciones:
 """)
 
-# Entrada del usuario
-pregunta = st.text_input("Escribe tu pregunta aquí:")
+# Preguntas rápidas
+col1, col2, col3 = st.columns(3)
+pregunta = ""
+with col1:
+    if st.button("🏀 ¿Cómo empiezo?"):
+        pregunta = "¿Cómo empiezo en el básquetbol 3x3?"
+with col2:
+    if st.button("🏃 Ejercicios"):
+        pregunta = "¿Qué ejercicios puedo hacer si estoy empezando en 3x3?"
+with col3:
+    if st.button("📏 Reglas"):
+        pregunta = "¿Cuáles son las reglas básicas del 3x3?"
 
-# Lógica del asistente
+# Entrada personalizada
+user_input = st.text_input("...o escribe tu propia pregunta:")
+
+# Si escribió algo, se sobrepone a los botones
+if user_input:
+    pregunta = user_input
+
+# Procesamiento de la respuesta
 if pregunta:
     with st.spinner("Coach X3 está pensando..."):
         prompt = (
@@ -65,4 +94,3 @@ if pregunta:
         respuesta = chat.choices[0].message.content
         st.success("Coach X3 responde:")
         st.write(respuesta)
-
