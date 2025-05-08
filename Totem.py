@@ -31,11 +31,14 @@ st.markdown("""
             background-color: white;
         }
         .stButton button {
-            background-color: #ff6f3c;
-            color: white;
-            border-radius: 8px;
-            padding: 0.5em 1.5em;
-            font-weight: bold;
+    background-color: #111111;
+    color: white;
+    border-radius: 8px;
+    padding: 0.5em 1.5em;
+    font-weight: bold;
+    border: none;
+}
+
         }
         h1, h2 {
             color: #333333;
