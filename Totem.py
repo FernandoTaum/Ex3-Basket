@@ -46,10 +46,12 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Logo y título centrado
-st.markdown('<div class="title-container">', unsafe_allow_html=True)
-st.image("logo_ex3basket.png", width=140)
-st.markdown("</div>", unsafe_allow_html=True)
+# Logo y título
+st.markdown("""
+<div style='text-align: center;'>
+    <img src='logo_ex3basket.png' width='140'/>
+</div>
+""", unsafe_allow_html=True)
 st.title("Coach X3 - Ex3 Basket")
 st.subheader("Tu entrenador virtual de básquetbol 3x3")
 
@@ -75,7 +77,7 @@ with col3:
 # Entrada personalizada
 user_input = st.text_input("...o escribe tu propia pregunta:")
 
-# Si escribió algo, se usa como prioridad
+# Usar input si hay
 if user_input:
     pregunta = user_input
 
@@ -106,3 +108,11 @@ if pregunta:
         st.subheader("Coach X3 responde:")
         st.write(respuesta)
         st.markdown('</div>', unsafe_allow_html=True)
+
+# Pie de autoría sutil
+st.markdown("""
+<hr style="margin-top: 30px;">
+<p style='text-align: center; color: gray; font-size: 0.8em;'>
+Desarrollado por Fernando Taum Aros para el proyecto Ex3 Basket · 2025
+</p>
+""", unsafe_allow_html=True)
