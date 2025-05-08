@@ -8,15 +8,7 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-tu_api_key_local"))
 
 st.set_page_config(page_title="Coach X3 | Ex3 Basket", layout="centered")
 
-# 🔒 Forzar tema claro incluso si el navegador está en modo oscuro
-st.markdown("""
-    <script>
-        const body = window.parent.document.querySelector('body');
-        body.setAttribute('data-theme', 'light');
-    </script>
-""", unsafe_allow_html=True)
-
-# Estilo visual adaptado
+# CSS ADAPTADO AL MODO OSCURO
 st.markdown("""
     <style>
         body, .main {
@@ -36,16 +28,28 @@ st.markdown("""
         }
 
         .stTextInput input {
-            background-color: white !important;
-            color: black !important;
-            border: 1px solid #ccc !important;
-            border-radius: 8px !important;
-            padding: 10px !important;
-            caret-color: black !important;
+            background-color: white;
+            color: black;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            caret-color: black;
         }
 
         .stTextInput input::placeholder {
-            color: #888 !important;
+            color: #888;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .stTextInput input {
+                background-color: #222 !important;
+                color: white !important;
+                border: 1px solid #555 !important;
+                caret-color: white !important;
+            }
+            .stTextInput input::placeholder {
+                color: #aaa !important;
+            }
         }
 
         .stButton button {
@@ -75,11 +79,11 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# Título y subtítulo
+# Título
 st.markdown("<h1 style='text-align: center;'>Coach X3 - Ex3 Basket</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; font-weight: normal;'>Tu entrenador virtual de básquetbol 3x3</h3>", unsafe_allow_html=True)
 
-# Bienvenida
+# Instrucciones
 st.write("""
 **¡Bienvenido!** Este tótem fue creado para ayudarte a aprender básquetbol 3x3.
 Hazle una pregunta a Coach X3 o selecciona una de las siguientes opciones:
