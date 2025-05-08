@@ -3,12 +3,10 @@ from openai import OpenAI
 import os
 import base64
 
-# Configurar API
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-tu_api_key_local"))
 
 st.set_page_config(page_title="Coach X3 | Ex3 Basket", layout="centered")
 
-# Estilos visuales adaptados a móviles y modo oscuro
 st.markdown("""
     <style>
         body, .main {
@@ -24,14 +22,15 @@ st.markdown("""
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             margin-top: 20px;
         }
-        input[type="text"] {
+        input, textarea, .stTextInput input {
             background-color: white !important;
             color: black !important;
+            caret-color: black !important;
         }
         .stTextInput > div > div > input {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 10px;
+            border: 1px solid #ccc !important;
+            border-radius: 8px !important;
+            padding: 10px !important;
         }
         .stButton button {
             background-color: #111111;
@@ -47,7 +46,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Logo centrado (local)
 file_ = open("logo_ex3basket.png", "rb")
 contents = file_.read()
 data_url = base64.b64encode(contents).decode("utf-8")
@@ -59,17 +57,14 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# Título y subtítulo centrados
 st.markdown("<h1 style='text-align: center;'>Coach X3 - Ex3 Basket</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; font-weight: normal;'>Tu entrenador virtual de básquetbol 3x3</h3>", unsafe_allow_html=True)
 
-# Instrucciones
 st.write("""
 **¡Bienvenido!** Este tótem fue creado para ayudarte a aprender básquetbol 3x3.
 Hazle una pregunta a Coach X3 o selecciona una de las siguientes opciones:
 """)
 
-# Preguntas sugeridas
 col1, col2, col3 = st.columns(3)
 pregunta = ""
 with col1:
@@ -82,13 +77,11 @@ with col3:
     if st.button("📏 Reglas"):
         pregunta = "¿Cuáles son las reglas básicas del 3x3?"
 
-# Entrada personalizada
 user_input = st.text_input("...o escribe tu propia pregunta:")
 
 if user_input:
     pregunta = user_input
 
-# Generar respuesta
 if pregunta:
     with st.spinner("Coach X3 está pensando..."):
         prompt = (
@@ -116,7 +109,6 @@ if pregunta:
         st.write(respuesta)
         st.markdown('</div>', unsafe_allow_html=True)
 
-# Pie de autoría
 st.markdown("""
 <hr style="margin-top: 30px;">
 <p style='text-align: center; color: gray; font-size: 0.8em;'>
