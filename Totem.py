@@ -43,11 +43,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Logo centrado con HTML puro
-st.markdown("""
-<div style='text-align: center; margin-bottom: 0.5em;'>
-    <img src='https://raw.githubusercontent.com/FernandoTaum/Ex3-Basket/main/logo_ex3basket.png' width='140'/>
-</div>
-""", unsafe_allow_html=True)
+st.markdown('<div style="text-align: center;">', unsafe_allow_html=True)
+st.image("logo_ex3basket.png", width=140)
+st.markdown("</div>", unsafe_allow_html=True)
 
 # Título
 st.title("Coach X3 - Ex3 Basket")
