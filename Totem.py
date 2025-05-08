@@ -2,23 +2,30 @@ import streamlit as st
 from openai import OpenAI
 import os
 
-# Configuración de la API
+# Configurar API
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-tu_api_key_local"))
 
-# Configuración general de la página
 st.set_page_config(page_title="Coach X3 | Ex3 Basket", layout="centered")
 
-# Estilos personalizados con colores y formato
+# Estilo visual mejorado
 st.markdown("""
     <style>
-        body {
-            background-color: #fff8f2;
-        }
-        .main {
+        body, .main {
             background-color: #fff8f2;
         }
         .stApp {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .title-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .response-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-top: 20px;
         }
         .stTextInput > div > div > input {
             border: 1px solid #ccc;
@@ -29,7 +36,7 @@ st.markdown("""
         .stButton button {
             background-color: #ff6f3c;
             color: white;
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 0.5em 1.5em;
             font-weight: bold;
         }
@@ -39,10 +46,12 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Logo y bienvenida
-st.image("logo_ex3basket.png", width=160)
-st.title("🏀 Coach X3")
-st.subheader("Entrenador virtual de Ex3 Basket")
+# Logo y título centrado
+st.markdown('<div class="title-container">', unsafe_allow_html=True)
+st.image("logo_ex3basket.png", width=140)
+st.markdown("</div>", unsafe_allow_html=True)
+st.title("Coach X3 - Ex3 Basket")
+st.subheader("Tu entrenador virtual de básquetbol 3x3")
 
 # Instrucciones
 st.write("""
@@ -66,11 +75,11 @@ with col3:
 # Entrada personalizada
 user_input = st.text_input("...o escribe tu propia pregunta:")
 
-# Si escribió algo, se sobrepone a los botones
+# Si escribió algo, se usa como prioridad
 if user_input:
     pregunta = user_input
 
-# Procesamiento de la respuesta
+# Generar respuesta
 if pregunta:
     with st.spinner("Coach X3 está pensando..."):
         prompt = (
@@ -92,5 +101,8 @@ if pregunta:
         )
 
         respuesta = chat.choices[0].message.content
-        st.success("Coach X3 responde:")
+
+        st.markdown('<div class="response-box">', unsafe_allow_html=True)
+        st.subheader("Coach X3 responde:")
         st.write(respuesta)
+        st.markdown('</div>', unsafe_allow_html=True)
