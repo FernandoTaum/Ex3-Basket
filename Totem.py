@@ -1,13 +1,14 @@
 import streamlit as st
 from openai import OpenAI
 import os
+import base64
 
 # Configurar API
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-tu_api_key_local"))
 
 st.set_page_config(page_title="Coach X3 | Ex3 Basket", layout="centered")
 
-# Estilo visual mejorado
+# Estilos visuales
 st.markdown("""
     <style>
         body, .main {
@@ -42,10 +43,17 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Logo centrado con HTML puro
-st.markdown('<div style="text-align: center;">', unsafe_allow_html=True)
-st.image("logo_ex3basket.png", width=140)
-st.markdown("</div>", unsafe_allow_html=True)
+# Logo centrado desde archivo local
+file_ = open("logo_ex3basket.png", "rb")
+contents = file_.read()
+data_url = base64.b64encode(contents).decode("utf-8")
+file_.close()
+
+st.markdown(f"""
+    <div style='text-align: center; margin-top: -20px; margin-bottom: 10px;'>
+        <img src="data:image/png;base64,{data_url}" width="140">
+    </div>
+""", unsafe_allow_html=True)
 
 # Título
 st.title("Coach X3 - Ex3 Basket")
