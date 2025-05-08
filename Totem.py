@@ -8,7 +8,7 @@ client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-tu_api_key_local"))
 
 st.set_page_config(page_title="Coach X3 | Ex3 Basket", layout="centered")
 
-# Estilo visual general (ajustado para tema oscuro en móviles)
+# Estilos visuales adaptados a móviles y modo oscuro
 st.markdown("""
     <style>
         body, .main {
@@ -24,12 +24,14 @@ st.markdown("""
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             margin-top: 20px;
         }
+        input[type="text"] {
+            background-color: white !important;
+            color: black !important;
+        }
         .stTextInput > div > div > input {
             border: 1px solid #ccc;
             border-radius: 8px;
             padding: 10px;
-            background-color: white;
-            color: black; /* Forzar texto negro visible en tema oscuro */
         }
         .stButton button {
             background-color: #111111;
@@ -45,7 +47,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Logo centrado (base64 local)
+# Logo centrado (local)
 file_ = open("logo_ex3basket.png", "rb")
 contents = file_.read()
 data_url = base64.b64encode(contents).decode("utf-8")
