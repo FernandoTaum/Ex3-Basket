@@ -3,12 +3,11 @@ from openai import OpenAI
 import os
 import base64
 
-# Configurar API
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-tu_api_key_local"))
 
 st.set_page_config(page_title="Coach X3 | Ex3 Basket", layout="centered")
 
-# CSS ADAPTADO AL MODO OSCURO
+# Estilos visuales compatibles
 st.markdown("""
     <style>
         body, .main {
@@ -27,29 +26,17 @@ st.markdown("""
             margin-top: 20px;
         }
 
-        .stTextInput input {
-            background-color: white;
-            color: black;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 10px;
-            caret-color: black;
+        textarea {
+            background-color: white !important;
+            color: black !important;
+            border: 1px solid #ccc !important;
+            border-radius: 8px !important;
+            padding: 10px !important;
+            caret-color: black !important;
         }
 
-        .stTextInput input::placeholder {
-            color: #888;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .stTextInput input {
-                background-color: #222 !important;
-                color: white !important;
-                border: 1px solid #555 !important;
-                caret-color: white !important;
-            }
-            .stTextInput input::placeholder {
-                color: #aaa !important;
-            }
+        textarea::placeholder {
+            color: #888 !important;
         }
 
         .stButton button {
@@ -79,7 +66,7 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# Título
+# Título y subtítulo
 st.markdown("<h1 style='text-align: center;'>Coach X3 - Ex3 Basket</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; font-weight: normal;'>Tu entrenador virtual de básquetbol 3x3</h3>", unsafe_allow_html=True)
 
@@ -102,11 +89,11 @@ with col3:
     if st.button("📏 Reglas"):
         pregunta = "¿Cuáles son las reglas básicas del 3x3?"
 
-# Entrada personalizada
-user_input = st.text_input("...o escribe tu propia pregunta:")
+# Entrada con text_area (más compatible con móviles)
+user_input = st.text_area("...o escribe tu propia pregunta:", height=100, placeholder="Ej: ¿Cómo se juega el 3x3?")
 
-if user_input:
-    pregunta = user_input
+if user_input.strip():
+    pregunta = user_input.strip()
 
 # Procesar pregunta
 if pregunta:
