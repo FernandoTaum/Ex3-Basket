@@ -3,21 +3,20 @@ from openai import OpenAI
 import os
 import base64
 
+# Configurar API
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-tu_api_key_local"))
 
 st.set_page_config(page_title="Coach X3 | Ex3 Basket", layout="centered")
 
-# Estilos visuales compatibles
+# Estilo visual general
 st.markdown("""
     <style>
         body, .main {
             background-color: #fff8f2;
         }
-
         .stApp {
             font-family: 'Segoe UI', sans-serif;
         }
-
         .response-box {
             background-color: white;
             padding: 20px;
@@ -25,20 +24,12 @@ st.markdown("""
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             margin-top: 20px;
         }
-
-        textarea {
-            background-color: white !important;
-            color: black !important;
-            border: 1px solid #ccc !important;
-            border-radius: 8px !important;
-            padding: 10px !important;
-            caret-color: black !important;
+        .stTextInput > div > div > input {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: white;
         }
-
-        textarea::placeholder {
-            color: #888 !important;
-        }
-
         .stButton button {
             background-color: #111111;
             color: white;
@@ -47,14 +38,13 @@ st.markdown("""
             font-weight: bold;
             border: none;
         }
-
         h1, h2, h3 {
             color: #333333;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# Logo centrado
+# Logo centrado (local)
 file_ = open("logo_ex3basket.png", "rb")
 contents = file_.read()
 data_url = base64.b64encode(contents).decode("utf-8")
@@ -66,7 +56,7 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# Título y subtítulo
+# Título y subtítulo centrados
 st.markdown("<h1 style='text-align: center;'>Coach X3 - Ex3 Basket</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; font-weight: normal;'>Tu entrenador virtual de básquetbol 3x3</h3>", unsafe_allow_html=True)
 
@@ -89,13 +79,13 @@ with col3:
     if st.button("📏 Reglas"):
         pregunta = "¿Cuáles son las reglas básicas del 3x3?"
 
-# Entrada con text_area (más compatible con móviles)
-user_input = st.text_area("...o escribe tu propia pregunta:", height=100, placeholder="Ej: ¿Cómo se juega el 3x3?")
+# Entrada personalizada
+user_input = st.text_input("...o escribe tu propia pregunta:")
 
-if user_input.strip():
-    pregunta = user_input.strip()
+if user_input:
+    pregunta = user_input
 
-# Procesar pregunta
+# Generar respuesta
 if pregunta:
     with st.spinner("Coach X3 está pensando..."):
         prompt = (
